@@ -5,9 +5,6 @@
 These are my dotfiles (configuration files) for my NixOS setup(s).
 Forked from https://github.com/librephoenix/nixos-config
 
-Here is my main setup:
-[[desktop.png]]
-
 ** My Themes
 [[https://github.com/danth/stylix#readme][Stylix]] (and [[https://github.com/SenchoPens/base16.nix#readme][base16.nix]], of course) is amazing, allowing you to theme your entire system with base16-themes.
 
