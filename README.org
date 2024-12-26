@@ -1,14 +1,9 @@
-#+title: NixOS Config
-#+author: Emmet
-
-[[https://gitlab.com/librephoenix/nixos-config][Main Repo Link (GitLab)]]
-
-[[https://github.com/librephoenix/nixos-config][Mirror Repo Link (GitHub)]]
-
-[[https://codeberg.org/librephoenix/nixos-config][Mirror Repo Link (Codeberg)]]
+#+title: Rudra Keshwani's awesome NixOS Config
+#+author: Rudra
 
 ** What is this repository?
 These are my dotfiles (configuration files) for my NixOS setup(s).
+Forked from https://github.com/librephoenix/nixos-config
 
 Here is my main setup:
 [[desktop.png]]
