@@ -2,9 +2,8 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ lib, pkgs, systemSettings, userSettings, ... }:
+{ pkgs, systemSettings, userSettings, ... }:
 
-with lib;
 let
   nixos-wsl = import ./nixos-wsl;
 in
@@ -82,7 +81,7 @@ in
     isNormalUser = true;
     description = userSettings.name;
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ git ];
     uid = 1000;
   };
 
