@@ -1,19 +1,19 @@
-{ lib
-, pkgs
-, config
-, automountPath
-, defaultUser
-, defaultUserHome ? "/home/${defaultUser}"
-, ...
+{
+  lib,
+  pkgs,
+  config,
+  automountPath,
+  defaultUser,
+  defaultUserHome ? "/home/${defaultUser}",
+  ...
 }:
-
 pkgs.substituteAll {
   name = "syschdemd";
   src = ./syschdemd.sh;
   dir = "bin";
   isExecutable = true;
 
-  buildInputs = with pkgs; [ daemonize ];
+  buildInputs = with pkgs; [daemonize];
 
   inherit defaultUser defaultUserHome;
   inherit (pkgs) daemonize;

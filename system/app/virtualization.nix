@@ -1,7 +1,5 @@
-{ pkgs, ... }:
-
-{
-  environment.systemPackages = with pkgs; [ virt-manager distrobox ];
+{pkgs, ...}: {
+  environment.systemPackages = with pkgs; [virt-manager distrobox];
 
   virtualisation.libvirtd = {
     allowedBridges = [
@@ -15,5 +13,4 @@
   programs.virt-manager.enable = true;
   virtualisation.waydroid.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
-
 }

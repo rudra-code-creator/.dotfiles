@@ -3,9 +3,7 @@
   # lib,
   # pkgs,
   ...
-}:
-
-{
+}: {
   networking = {
     firewall = {
       enable = false; # change this to enable and disable
@@ -18,7 +16,6 @@
     '';
   };
 }
-
 ### PORTS ###
 # 5000 - pyserve
 # 631 9100 5353 - Cups (Printer)
@@ -31,3 +28,4 @@
 # 8384 - Syncthing
 # 445 - Samba
 # 22 -ssh
+

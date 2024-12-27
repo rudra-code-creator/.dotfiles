@@ -1,7 +1,10 @@
-{ config, pkgs, userSettings, ... }:
-
 {
-  home.packages = [ pkgs.bat ];
+  config,
+  pkgs,
+  userSettings,
+  ...
+}: {
+  home.packages = [pkgs.bat];
   programs.bat = {
     enable = true;
     config = {

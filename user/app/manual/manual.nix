@@ -1,6 +1,9 @@
-{ config, pkgs, userSettings, ... }:
-
 {
+  config,
+  pkgs,
+  userSettings,
+  ...
+}: {
   manual = {
     # Description
     # Whether to install the HTML manual. This also installs the

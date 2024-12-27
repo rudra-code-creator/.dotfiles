@@ -4,10 +4,7 @@
   pkgs,
   # lib,
   ...
-}:
-
-{
-
+}: {
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
 
@@ -36,7 +33,7 @@
     #rudratwo = {
     #  isNormalUser = true;
     #  extraGroups = [ "rudratwo" "cups" "networkmanager" ];
-    #  uid = 1001;  
+    #  uid = 1001;
     #};
   };
 
@@ -50,9 +47,9 @@
     #};
   };
 }
-
 # Manuall set userid and groupid
 #sudo usermod -u 1000 rudra
 #sudo groupmod -g 1001 rudratwo
 #sudo usermod -u 1000 rudra
 #sudo groupmod -g 1001 rudratwo
+

@@ -1,14 +1,11 @@
 # Edit this configuration file to define what should be installed on your system.  Help is available in the
 # configuration.nix(5) man page and in the NixOS manual (accessible by running ‘nixos-help’).
-
 {
   # config,
   pkgs,
   lib,
   ...
-}:
-
-{
+}: {
   imports = [
     ./hardware-configuration.nix
     #../displaylink/displaylink.nix
@@ -29,14 +26,11 @@
     #PACKAGES
     ./Packages/packages.nix
     # ./Packages/gnome-extensions.nix
-
   ];
 
   services.xserver = {
     enable = true;
   };
-
-
 
   # Define your hostname.
   networking.hostName = "nixos";
@@ -52,14 +46,11 @@
 
   environment = {
     sessionVariables = {
-
       XDG_CACHE_HOME = "$HOME/.cache";
       XDG_CONFIG_HOME = "$HOME/.config";
       XDG_DATA_HOME = "$HOME/.local/share";
       XDG_BIN_HOME = "$HOME/.local/bin";
       XDG_DESKTOP_DIR = "$HOME/Desktop";
-
-
     };
 
     variables = {
@@ -79,19 +70,18 @@
     };
   };
 
-  fonts.packages = with pkgs;
-    [
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
-      noto-fonts-emoji
-      (nerdfonts.override {fonts = ["JetBrainsMono"];})
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+    noto-fonts-emoji
+    (nerdfonts.override {fonts = ["JetBrainsMono"];})
 
-      dejavu_fonts
-      fira
-      fira-code
-      iosevka
-    ];
+    dejavu_fonts
+    fira
+    fira-code
+    iosevka
+  ];
 
   fonts.fontconfig = {
     defaultFonts.monospace = ["JetBrainsMono"];
@@ -155,12 +145,11 @@
   };
 
   environment.sessionVariables = {
-    PATH = [ "${pkgs.pyload-ng}/bin" ];
+    PATH = ["${pkgs.pyload-ng}/bin"];
   };
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
 }

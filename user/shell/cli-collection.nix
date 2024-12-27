@@ -1,10 +1,10 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   # Collection of useful CLI apps
   home.packages = with pkgs; [
-
     # Command Line
-    disfetch lolcat cowsay
+    disfetch
+    lolcat
+    cowsay
     starfetch
     cava
     killall
@@ -12,7 +12,11 @@
     timer
     brightnessctl
     gnugrep
-    bat eza fd bottom ripgrep
+    bat
+    eza
+    fd
+    bottom
+    ripgrep
     rsync
     unzip
     w3m
@@ -20,9 +24,10 @@
     hwinfo
     pciutils
     numbat
-    vim neovim
+    vim
+    neovim
 
-    (pkgs.callPackage ../pkgs/pokemon-colorscripts.nix { })
+    (pkgs.callPackage ../pkgs/pokemon-colorscripts.nix {})
     (pkgs.writeShellScriptBin "airplane-mode" ''
       #!/bin/sh
       connectivity="$(nmcli n connectivity)"
@@ -33,7 +38,6 @@
           nmcli n on
       fi
     '')
-
   ];
 
   programs.fzf = {
@@ -51,8 +55,7 @@
     ];
 
     tmux.enableShellIntegration = true;
-    tmux.shellIntegrationOptions = [ "-d 40%" ];
-
+    tmux.shellIntegrationOptions = ["-d 40%"];
   };
 
   programs.bottom = {
@@ -155,7 +158,6 @@
     enableFishIntegration = true;
     enableNushellIntegration = true;
     enableXsessionIntegration = true;
-
   };
 
   programs.thefuck = {
@@ -192,4 +194,3 @@
     enableScDaemon = true;
   };
 }
-

@@ -1,6 +1,14 @@
-{ config, lib, pkgs, pkgs-stable, pkgs-emacs, systemSettings, userSettings, inputs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  pkgs-stable,
+  pkgs-emacs,
+  systemSettings,
+  userSettings,
+  inputs,
+  ...
+}: {
   # Simply install just the packages
   environment.packages = with pkgs; [
     # User-facing stuff that you really really want to have

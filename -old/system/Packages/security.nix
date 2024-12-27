@@ -1,25 +1,23 @@
-{ 
-  # config, 
-  # pkgs, 
-  ... 
-}:
-
 {
+  # config,
+  # pkgs,
+  ...
+}: {
   security.doas = {
-      enable = true;
-      extraRules = [
-        {
-          users = ["root" "rudra"];
-          noPass = true;
-          keepEnv = true;
-        }
-      ];
-    };
+    enable = true;
+    extraRules = [
+      {
+        users = ["root" "rudra"];
+        noPass = true;
+        keepEnv = true;
+      }
+    ];
+  };
 
   # Add an alias to the shell for backward-compat and convenience.
   # environment.shellAliases = {sudo = "doas";};
 
-  # UNCOMMENT BELOW TO TUN ON LOCKDOWN MODE 
+  # UNCOMMENT BELOW TO TUN ON LOCKDOWN MODE
 
   # # Ripped from:
   # # https://xeiaso.net/blog/paranoid-nixos-2021-07-18/
@@ -47,6 +45,5 @@
 
   # environment.systemPackages = with pkgs; [clamav]; # PCI Compliance
 
-  # UNCOMMENT ABOVE TO TUN ON LOCKDOWN MODE 
-
+  # UNCOMMENT ABOVE TO TUN ON LOCKDOWN MODE
 }

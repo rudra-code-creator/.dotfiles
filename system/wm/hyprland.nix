@@ -1,7 +1,10 @@
-{ inputs, pkgs, ... }: let
-  pkgs-hyprland = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-in
 {
+  inputs,
+  pkgs,
+  ...
+}: let
+  pkgs-hyprland = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+in {
   # Import wayland config
   imports = [
     ./wayland.nix
@@ -44,5 +47,4 @@ in
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     oxygen
   ];
-
 }

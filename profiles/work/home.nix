@@ -1,10 +1,15 @@
-{ config, pkgs, pkgs-stable, pkgs-kdenlive, userSettings, ... }:
-
 {
+  config,
+  pkgs,
+  pkgs-stable,
+  pkgs-kdenlive,
+  userSettings,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = userSettings.username;
-  home.homeDirectory = "/home/"+userSettings.username;
+  home.homeDirectory = "/home/" + userSettings.username;
 
   dconf = {
     enable = true;
@@ -12,7 +17,6 @@
     settings."org/gnome/shell" = {
       disable-user-extensions = false;
       enabled-extensions = with pkgs.gnomeExtensions; [
-
         add-username-to-top-panel.extensionUuid
         alphabetical-app-grid.extensionUuid
         appindicator.extensionUuid
@@ -53,7 +57,6 @@
 
         applications-menu.extensionUuid
         native-window-placement.extensionUuid
-
       ];
     };
 
@@ -64,27 +67,27 @@
   # home-manager.backupFileExtension = "backup";
 
   imports = [
-              (./. + "../../../user/wm"+("/"+userSettings.wm+"/"+userSettings.wm)+".nix") # My window manager selected from flake
-              ../../user/shell/sh.nix # My zsh and bash config
-              ../../user/app/nushell/nushell.nix # My nushell config
-              ../../user/shell/cli-collection.nix # Useful CLI apps
-              #../../user/app/doom-emacs/doom.nix # My doom emacs config
-              ../../user/app/nvim/nvim.nix # My doom emacs config
-              #../../user/app/emacsng # Me experimenting with emacsng and a vanilla config
-              ../../user/app/ranger/ranger.nix # My ranger file manager config
-              ../../user/app/git/git.nix # My git config
-              ../../user/app/bat/bat.nix # My bat config
-              ../../user/app/manual/manual.nix # My manpages config
-              ../../user/app/keepass/keepass.nix # My password manager
-              (./. + "../../../user/app/browser"+("/"+userSettings.browser)+".nix") # My default browser selected from flake
-              ../../user/app/virtualization/virtualization.nix # Virtual machines
-              #../../user/app/flatpak/flatpak.nix # Flatpaks
-              ../../user/style/stylix.nix # Styling and themes for my apps
-              ../../user/lang/cc/cc.nix # C and C++ tools
-              ../../user/lang/godot/godot.nix # Game development
-              #../../user/pkgs/blockbench.nix # Blockbench ## marked as insecure
-              ../../user/hardware/bluetooth.nix # Bluetooth
-            ];
+    (./. + "../../../user/wm" + ("/" + userSettings.wm + "/" + userSettings.wm) + ".nix") # My window manager selected from flake
+    ../../user/shell/sh.nix # My zsh and bash config
+    ../../user/app/nushell/nushell.nix # My nushell config
+    ../../user/shell/cli-collection.nix # Useful CLI apps
+    #../../user/app/doom-emacs/doom.nix # My doom emacs config
+    ../../user/app/nvim/nvim.nix # My doom emacs config
+    #../../user/app/emacsng # Me experimenting with emacsng and a vanilla config
+    ../../user/app/ranger/ranger.nix # My ranger file manager config
+    ../../user/app/git/git.nix # My git config
+    ../../user/app/bat/bat.nix # My bat config
+    ../../user/app/manual/manual.nix # My manpages config
+    ../../user/app/keepass/keepass.nix # My password manager
+    (./. + "../../../user/app/browser" + ("/" + userSettings.browser) + ".nix") # My default browser selected from flake
+    ../../user/app/virtualization/virtualization.nix # Virtual machines
+    #../../user/app/flatpak/flatpak.nix # Flatpaks
+    ../../user/style/stylix.nix # Styling and themes for my apps
+    ../../user/lang/cc/cc.nix # C and C++ tools
+    ../../user/lang/godot/godot.nix # Game development
+    #../../user/pkgs/blockbench.nix # Blockbench ## marked as insecure
+    ../../user/hardware/bluetooth.nix # Bluetooth
+  ];
 
   home.file = {
     # To test whether home manager works
@@ -111,7 +114,7 @@
 
   home.stateVersion = "22.11"; # Please read the comment before changing.
 
-  home.packages = (with pkgs; [
+  home.packages = with pkgs; [
     # Core
     zsh
     alacritty
@@ -216,7 +219,6 @@
     #melos #A tool for managing Dart projects with multiple packages. With IntelliJ and Vscode IDE support. Supports automated versioning, changelogs & publishing via Conventional Commits.
     #neovim-unwrapped
 
-
     # vscodium # Text Editor
     vscode
     vscode-runner
@@ -224,8 +226,6 @@
     vscode-langservers-extracted
     code-cursor
     openvscode-server
-
-
 
     ghz # gRPC benchmarking and load testing
     ghc # Glasgow Haskell compiler
@@ -318,7 +318,6 @@
     discord
     telegram-desktop
 
-
     # Jellyfin Programs
     #jellyfin
     #jellyfin-ffmpeg
@@ -329,17 +328,17 @@
     # The following requires 64-bit FL Studio (FL64) to be installed to a bottle
     # With a bottle name of "FL Studio"
     (pkgs.writeShellScriptBin "flstudio" ''
-       #!/bin/sh
-       if [ -z "$1" ]
-         then
-           bottles-cli run -b "FL Studio" -p FL64
-           #flatpak run --command=bottles-cli com.usebottles.bottles run -b FL\ Studio -p FL64
-         else
-           filepath=$(winepath --windows "$1")
-           echo \'"$filepath"\'
-           bottles-cli run -b "FL Studio" -p "FL64" --args \'"$filepath"\'
-           #flatpak run --command=bottles-cli com.usebottles.bottles run -b FL\ Studio -p FL64 -args "$filepath"
-         fi
+      #!/bin/sh
+      if [ -z "$1" ]
+        then
+          bottles-cli run -b "FL Studio" -p FL64
+          #flatpak run --command=bottles-cli com.usebottles.bottles run -b FL\ Studio -p FL64
+        else
+          filepath=$(winepath --windows "$1")
+          echo \'"$filepath"\'
+          bottles-cli run -b "FL Studio" -p "FL64" --args \'"$filepath"\'
+          #flatpak run --command=bottles-cli com.usebottles.bottles run -b FL\ Studio -p FL64 -args "$filepath"
+        fi
     '')
     (pkgs.makeDesktopItem {
       name = "flstudio";
@@ -353,7 +352,7 @@
     (stdenv.mkDerivation {
       name = "flstudio-icon";
       # icon from https://www.reddit.com/r/MacOS/comments/jtmp7z/i_made_icons_for_discord_spotify_and_fl_studio_in/
-      src = [ ../../user/pkgs/flstudio.png ];
+      src = [../../user/pkgs/flstudio.png];
 
       unpackPhase = ''
         for srcFile in $src; do
@@ -374,7 +373,7 @@
     krita
     pinta
     inkscape
-    (pkgs-stable.lollypop.override { youtubeSupport = false; })
+    (pkgs-stable.lollypop.override {youtubeSupport = false;})
     vlc
     mpv
     yt-dlp
@@ -448,11 +447,12 @@
     remmina
     sshfs
     texinfo
-    libffi zlib
+    libffi
+    zlib
     nodePackages.ungit
     ventoy
     kdenlive
-  ]);
+  ];
 
   home.sessionPath = [
     # no need for a bare $PATH item; these are all appended to any base
@@ -464,11 +464,10 @@
     "$HOME/rudra-app-repo"
   ];
 
-  home.file.".local/share/pixmaps/nixos-snowflake-stylix.svg".source =
-    config.lib.stylix.colors {
-      template = builtins.readFile ../../user/pkgs/nixos-snowflake-stylix.svg.mustache;
-      extension = "svg";
-    };
+  home.file.".local/share/pixmaps/nixos-snowflake-stylix.svg".source = config.lib.stylix.colors {
+    template = builtins.readFile ../../user/pkgs/nixos-snowflake-stylix.svg.mustache;
+    extension = "svg";
+  };
 
   services.syncthing.enable = true;
   services.nextcloud-client = {
@@ -521,9 +520,11 @@
 
   gtk.iconTheme = {
     package = pkgs.papirus-icon-theme;
-    name = if (config.stylix.polarity == "dark") then "Papirus-Dark" else "Papirus-Light";
+    name =
+      if (config.stylix.polarity == "dark")
+      then "Papirus-Dark"
+      else "Papirus-Light";
   };
 
   services.pasystray.enable = true;
-
 }

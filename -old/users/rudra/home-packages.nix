@@ -3,13 +3,10 @@
   pkgs,
   # lib,
   ...
-}:
-
-{
+}: {
   # Packages that should be installed to the user profile.
   # sldsflld
   home.packages = with pkgs; [
-
     # Testing
     kmonad # keybaord
 
@@ -70,7 +67,6 @@
     melos #A tool for managing Dart projects with multiple packages. With IntelliJ and Vscode IDE support. Supports automated versioning, changelogs & publishing via Conventional Commits.
     #neovim-unwrapped
 
-
     # vscodium # Text Editor
     vscode
     vscode-runner
@@ -78,8 +74,6 @@
     vscode-langservers-extracted
     code-cursor
     openvscode-server
-
-
 
     ghz # gRPC benchmarking and load testing
     ghc # Glasgow Haskell compiler
@@ -180,5 +174,4 @@
     #jellyfin-ffmpeg
     #jellyfin-web
   ];
-
 }

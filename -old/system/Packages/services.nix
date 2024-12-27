@@ -2,9 +2,7 @@
   # config,
   # pkgs,
   ...
-}:
-
-{
+}: {
   services = {
     customCups.enable = true; # Enable CUPS to print documents defined in cups.nix.
     libinput.enable = true; # Enable touchpad support

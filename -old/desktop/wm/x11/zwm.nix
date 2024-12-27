@@ -3,19 +3,16 @@
   lib,
   pkgs,
   ...
-}:
-
-let
-  zwm = pkgs.callPackage /home/ctech/.config/zwm/default.nix { };
-in
-{
+}: let
+  zwm = pkgs.callPackage /home/ctech/.config/zwm/default.nix {};
+in {
   options.services.zwm = {
     enable = lib.mkEnableOption "zwm window manager";
   };
 
   config = lib.mkIf config.services.zwm.enable {
-    environment.systemPackages = [ zwm ];
-    environment.pathsToLink = [ "/libexec" ];
+    environment.systemPackages = [zwm];
+    environment.pathsToLink = ["/libexec"];
 
     services.xserver = {
       enable = true;
@@ -37,7 +34,7 @@ in
 
     xdg.portal = {
       enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      extraPortals = [pkgs.xdg-desktop-portal-gtk];
     };
   };
 }

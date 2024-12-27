@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   # Originally this file was meant to be just for kde plasma but it has grown
   # to include other desktop environments, feel free to remove any you dont
   # want/need.
@@ -18,13 +16,11 @@
   ];
 
   #Gnome
-  environment.pathsToLink = [ "/libexec" ];
+  environment.pathsToLink = ["/libexec"];
   services.xserver.desktopManager.gnome.enable = true;
 
   #cinnamon
   services.xserver.desktopManager.cinnamon.enable = true;
 
   # Hastag #icantdecidewhatmyfavouriteDEis :)
-
 }
-

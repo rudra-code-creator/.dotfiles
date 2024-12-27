@@ -1,42 +1,46 @@
-{ lib, pkgs, config, ... }:
-
-with builtins; with lib;
 {
-  options.wsl = with types;
-    let
-      coercedToStr = coercedTo (oneOf [ bool path int ]) (toString) str;
-    in
-    {
-      enable = mkEnableOption "support for running NixOS as a WSL distribution";
-      automountPath = mkOption {
-        type = str;
-        default = "/mnt";
-        description = "The path where windows drives are mounted (e.g. /mnt/c)";
-      };
-      automountOptions = mkOption {
-        type = str;
-        default = "metadata,uid=1000,gid=100";
-        description = "Options to use when mounting windows drives";
-      };
-      defaultUser = mkOption {
-        type = str;
-        default = "nixos";
-        description = "The name of the default user";
-      };
-      startMenuLaunchers = mkEnableOption "shortcuts for GUI applications in the windows start menu";
-      wslConf = mkOption {
-        type = attrsOf (attrsOf (oneOf [ str int bool ]));
-        description = "Entries that are added to /etc/wsl.conf";
-      };
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+with builtins;
+with lib; {
+  options.wsl = with types; let
+    coercedToStr = coercedTo (oneOf [bool path int]) toString str;
+  in {
+    enable = mkEnableOption "support for running NixOS as a WSL distribution";
+    automountPath = mkOption {
+      type = str;
+      default = "/mnt";
+      description = "The path where windows drives are mounted (e.g. /mnt/c)";
     };
+    automountOptions = mkOption {
+      type = str;
+      default = "metadata,uid=1000,gid=100";
+      description = "Options to use when mounting windows drives";
+    };
+    defaultUser = mkOption {
+      type = str;
+      default = "nixos";
+      description = "The name of the default user";
+    };
+    startMenuLaunchers = mkEnableOption "shortcuts for GUI applications in the windows start menu";
+    wslConf = mkOption {
+      type = attrsOf (attrsOf (oneOf [str int bool]));
+      description = "Entries that are added to /etc/wsl.conf";
+    };
+  };
 
-  config =
-    let
-      cfg = config.wsl;
-      syschdemd = import ../syschdemd.nix { inherit lib pkgs config; inherit (cfg) automountPath defaultUser; defaultUserHome = config.users.users.${cfg.defaultUser}.home; };
-    in
+  config = let
+    cfg = config.wsl;
+    syschdemd = import ../syschdemd.nix {
+      inherit lib pkgs config;
+      inherit (cfg) automountPath defaultUser;
+      defaultUserHome = config.users.users.${cfg.defaultUser}.home;
+    };
+  in
     mkIf cfg.enable {
-
       wsl.wslConf = {
         automount = {
           enabled = true;
@@ -57,9 +61,8 @@ with builtins; with lib;
       hardware.opengl.enable = true; # Enable GPU acceleration
 
       environment = {
-
         etc = {
-          "wsl.conf".text = generators.toINI { } cfg.wslConf;
+          "wsl.conf".text = generators.toINI {} cfg.wslConf;
 
           # DNS settings are managed by WSL
           hosts.enable = !config.wsl.wslConf.network.generateHosts;
@@ -67,7 +70,7 @@ with builtins; with lib;
         };
 
         systemPackages = [
-          (pkgs.runCommand "wslpath" { } ''
+          (pkgs.runCommand "wslpath" {} ''
             mkdir -p $out/bin
             ln -s /init $out/bin/wslpath
           '')
@@ -79,13 +82,13 @@ with builtins; with lib;
       users.users.${cfg.defaultUser} = {
         isNormalUser = true;
         uid = 1000;
-        extraGroups = [ "wheel" ]; # Allow the default user to use sudo
+        extraGroups = ["wheel"]; # Allow the default user to use sudo
       };
 
       users.users.root = {
         shell = "${syschdemd}/bin/syschdemd";
         # Otherwise WSL fails to login as root with "initgroups failed 5"
-        extraGroups = [ "root" ];
+        extraGroups = ["root"];
       };
 
       security.sudo = {
@@ -97,7 +100,7 @@ with builtins; with lib;
 
       system.activationScripts = {
         copy-launchers = mkIf cfg.startMenuLaunchers (
-          stringAfter [ ] ''
+          stringAfter [] ''
             for x in applications icons; do
               echo "Copying /usr/share/$x"
               mkdir -p /usr/share/$x
@@ -105,7 +108,7 @@ with builtins; with lib;
             done
           ''
         );
-        populateBin = stringAfter [ ] ''
+        populateBin = stringAfter [] ''
           echo "setting up /bin..."
           ln -sf /init /bin/wslpath
           ln -sf ${pkgs.bashInteractive}/bin/bash /bin/sh
@@ -134,6 +137,6 @@ with builtins; with lib;
         enableEmergencyMode = false;
       };
 
-      warnings = (optional (config.systemd.services.systemd-resolved.enable && config.wsl.wslConf.network.generateResolvConf) "systemd-resolved is enabled, but resolv.conf is managed by WSL");
+      warnings = optional (config.systemd.services.systemd-resolved.enable && config.wsl.wslConf.network.generateResolvConf) "systemd-resolved is enabled, but resolv.conf is managed by WSL";
     };
 }

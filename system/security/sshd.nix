@@ -1,6 +1,8 @@
-{ userSettings, authorizedKeys ? [], ... }:
-
 {
+  userSettings,
+  authorizedKeys ? [],
+  ...
+}: {
   # Enable incoming ssh
   services.openssh = {
     enable = true;

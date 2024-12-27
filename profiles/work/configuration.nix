@@ -1,33 +1,40 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ pkgs, lib, systemSettings, userSettings, ... }:
 {
-  imports =
-    [ ../../system/hardware-configuration.nix
-      ../../system/hardware/systemd.nix # systemd config
-      ../../system/hardware/kernel.nix # Kernel config
-      ../../system/hardware/power.nix # Power management
-      ../../system/hardware/time.nix # Network time sync
-      ../../system/hardware/opengl.nix
-      ../../system/hardware/printing.nix
-      ../../system/hardware/samba.nix
-      ../../system/hardware/bluetooth.nix
-      # ../../system/hardware/displaylink/displaylink.nix #Can't figure out how to get this working ARGGGGGH, will revisit if I ever get a laptop that uses displaylink
-      (./. + "../../../system/wm"+("/"+userSettings.wm)+".nix") # My window manager
-      #../../system/app/flatpak.nix
-      ../../system/app/virtualization.nix
-      ( import ../../system/app/docker.nix {storageDriver = null; inherit pkgs userSettings lib;} )
-      ../../system/security/doas.nix
-      ../../system/security/gpg.nix
-      ../../system/security/blocklist.nix
-      ../../system/security/firewall.nix
-      ../../system/security/firejail.nix
-      ../../system/security/openvpn.nix
-      ../../system/security/automount.nix
-      ../../system/style/stylix.nix
-    ];
+  pkgs,
+  lib,
+  systemSettings,
+  userSettings,
+  ...
+}: {
+  imports = [
+    ../../system/hardware-configuration.nix
+    ../../system/hardware/systemd.nix # systemd config
+    ../../system/hardware/kernel.nix # Kernel config
+    ../../system/hardware/power.nix # Power management
+    ../../system/hardware/time.nix # Network time sync
+    ../../system/hardware/opengl.nix
+    ../../system/hardware/printing.nix
+    ../../system/hardware/samba.nix
+    ../../system/hardware/bluetooth.nix
+    # ../../system/hardware/displaylink/displaylink.nix #Can't figure out how to get this working ARGGGGGH, will revisit if I ever get a laptop that uses displaylink
+    (./. + "../../../system/wm" + ("/" + userSettings.wm) + ".nix") # My window manager
+    #../../system/app/flatpak.nix
+    ../../system/app/virtualization.nix
+    (import ../../system/app/docker.nix {
+      storageDriver = null;
+      inherit pkgs userSettings lib;
+    })
+    ../../system/security/doas.nix
+    ../../system/security/gpg.nix
+    ../../system/security/blocklist.nix
+    ../../system/security/firewall.nix
+    ../../system/security/firejail.nix
+    ../../system/security/openvpn.nix
+    ../../system/security/automount.nix
+    ../../system/style/stylix.nix
+  ];
 
   # Fix nix path
   nix.nixPath = [
@@ -42,14 +49,11 @@
 
   environment = {
     sessionVariables = {
-
       XDG_CACHE_HOME = "$HOME/.cache";
       XDG_CONFIG_HOME = "$HOME/.config";
       XDG_DATA_HOME = "$HOME/.local/share";
       XDG_BIN_HOME = "$HOME/.local/bin";
       XDG_DESKTOP_DIR = "$HOME/Desktop";
-
-
     };
 
     variables = {
@@ -69,7 +73,6 @@
     };
   };
 
-
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
     (
@@ -80,7 +83,7 @@
               --set "LOCAL_GIT_DIRECTORY" ${prev.git} \
               --add-flags $out/share/${oldAttrs.pname}/resources/app \
               --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}" \
-              --prefix LD_LIBRARY_PATH : "${prev.lib.makeLibraryPath [ prev.stdenv.cc.cc.lib ]}"
+              --prefix LD_LIBRARY_PATH : "${prev.lib.makeLibraryPath [prev.stdenv.cc.cc.lib]}"
           '';
         });
       }
@@ -88,17 +91,21 @@
   ];
   # logseq
   nixpkgs.config.permittedInsecurePackages = [
-      "electron-27.3.11"
+    "electron-27.3.11"
   ];
 
   # Enable bin files to run
   programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = [
+    #IMPORTANT:
+    #put any missing dynamic libs for unpacking programs here,
+    #NOT in environment.systemPackages
+  ];
 
   nix = {
     settings = {
-
-      trusted-users = [ "@wheel" "root" "rudra"  ];
-      allowed-users = [ "@wheel" "root" "rudra"  ];
+      trusted-users = ["@wheel" "root" "rudra"];
+      allowed-users = ["@wheel" "root" "rudra"];
 
       experimental-features = "nix-command flakes";
       http-connections = 50;
@@ -122,14 +129,23 @@
   };
 
   # Kernel modules
-  boot.kernelModules = [ "i2c-dev" "i2c-piix4" "cpufreq_powersave" "fuse"];
+  boot.kernelModules = ["i2c-dev" "i2c-piix4" "cpufreq_powersave" "fuse"];
 
   # Bootloader
   # Use systemd-boot if uefi, default to grub otherwise
-  boot.loader.systemd-boot.enable = if (systemSettings.bootMode == "uefi") then true else false;
-  boot.loader.efi.canTouchEfiVariables = if (systemSettings.bootMode == "uefi") then true else false;
+  boot.loader.systemd-boot.enable =
+    if (systemSettings.bootMode == "uefi")
+    then true
+    else false;
+  boot.loader.efi.canTouchEfiVariables =
+    if (systemSettings.bootMode == "uefi")
+    then true
+    else false;
   boot.loader.efi.efiSysMountPoint = systemSettings.bootMountPath; # does nothing if running bios rather than uefi
-  boot.loader.grub.enable = if (systemSettings.bootMode == "uefi") then false else true;
+  boot.loader.grub.enable =
+    if (systemSettings.bootMode == "uefi")
+    then false
+    else true;
   boot.loader.grub.device = systemSettings.grubDevice; # does nothing if running uefi rather than bios
 
   # Networking
@@ -155,7 +171,7 @@
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = userSettings.name;
-    extraGroups = [ "networkmanager" "wheel" "input" "dialout" "video" "render" "fuse" ];
+    extraGroups = ["networkmanager" "wheel" "input" "dialout" "video" "render" "fuse"];
     packages = [];
     uid = 1000;
     openssh.authorizedKeys.keys = [
@@ -189,7 +205,6 @@
     nvd
     nvdtools
     nh # Nix helper
-
 
     flake-checker # Flake health checker
     autoflake #Tool to remove unused imports and unused variables
@@ -291,7 +306,6 @@
     eza
     bat
 
-
     # for compiling
     gcc
     gnumake
@@ -328,9 +342,6 @@
     kubectl-example
     kubectl-explore
     kubectl-gadget
-
-    #kubectl-graph #UNPUBLISHED FROM NIXPKGS
-
     kubectl-images
     kubectl-klock
     kubectl-ktop
@@ -341,7 +352,7 @@
     kubectl-view-allocations
     kubectl-view-secret
 
-
+    (import ../../system/bin/my-awesome-script.nix {inherit pkgs;})
 
     (pkgs.writeScriptBin "comma" ''
       if [ "$#" = 0 ]; then
@@ -358,7 +369,7 @@
   ];
 
   # I use zsh btw
-  environment.shells = with pkgs; [ zsh ];
+  environment.shells = with pkgs; [zsh];
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
 
@@ -375,19 +386,18 @@
   # It is ok to leave this unchanged for compatibility purposes
   system.stateVersion = "22.11";
 
-  fonts.packages = with pkgs;
-    [
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
-      noto-fonts-emoji
-      (nerdfonts.override {fonts = ["JetBrainsMono"];})
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+    noto-fonts-emoji
+    (nerdfonts.override {fonts = ["JetBrainsMono"];})
 
-      dejavu_fonts
-      fira
-      fira-code
-      iosevka
-    ];
+    dejavu_fonts
+    fira
+    fira-code
+    iosevka
+  ];
 
   fonts.fontconfig = {
     defaultFonts.monospace = ["JetBrainsMono"];
@@ -472,10 +482,9 @@
   services.xserver.enable = true;
 
   # Allow users in the "fuse" group to use FUSE
-  users.groups.fuse = { };
+  users.groups.fuse = {};
 
   #Enable Sudo [REPLACED BY DOAS]
   # security.sudo.enable = true;
   # security.sudo.wheelNeedsPassword = false;
-
 }

@@ -4,10 +4,7 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-{
+with lib; {
   options = {
     services.customCups = {
       enable = mkEnableOption "Enable custom CUPS printing configuration";
@@ -30,7 +27,7 @@ with lib;
       enable = true;
       browsing = true;
       defaultShared = true;
-      drivers = [ pkgs.canon-cups-ufr2 ];
+      drivers = [pkgs.canon-cups-ufr2];
       logLevel = "debug2";
       browsedConf = ''
         BrowseDNSSDSubTypes _cups,_print

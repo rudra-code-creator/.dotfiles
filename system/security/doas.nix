@@ -1,19 +1,20 @@
-{ userSettings, pkgs, ... }:
-
 {
+  userSettings,
+  pkgs,
+  ...
+}: {
   # Doas instead of sudo
   security.doas.enable = true;
   security.sudo.enable = false;
   security.doas.extraRules = [
-
     {
-      users = [ "${userSettings.username}" ];
+      users = ["${userSettings.username}"];
       keepEnv = true;
       persist = true;
     }
 
     {
-      users = [ "${userSettings.username}" ];
+      users = ["${userSettings.username}"];
       cmd = "tee";
       noPass = true;
     }
@@ -55,5 +56,4 @@
   # environment.systemPackages = with pkgs; [clamav]; # PCI Compliance
 
   # HACK: UNCOMMENT ABOVE TO TURN ON LOCKDOWN MODE
-
 }

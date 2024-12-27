@@ -4,8 +4,7 @@
   pkgs,
   # lib,
   ...
-}:
-{
+}: {
   nixpkgs.config.allowUnfree = true;
   # nixpkgs.config.allowUnsupportedSystem = true;
   environment.systemPackages = with pkgs; [
@@ -105,7 +104,6 @@
     nitch
     eza
     bat
-
 
     # for compiling
     gcc

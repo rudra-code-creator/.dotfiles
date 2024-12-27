@@ -1,11 +1,9 @@
 {
-#   config,
-#   pkgs,
-#   lib,
+  #   config,
+  #   pkgs,
+  #   lib,
   ...
-}:
-
-{
+}: {
   programs.nushell.configFile.text = ''
 
     # Nushell Config File

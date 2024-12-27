@@ -1,7 +1,8 @@
-{ config, pkgs, ... }:
-
 {
-
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./bashrc.nix
     #...other imports
@@ -24,10 +25,8 @@
 
   # Packages for the rudratwo user
   home.packages = with pkgs; [
-
     brave
     #more here
-
   ];
 
   # Example of how to configure a program (uncomment and modify as needed)

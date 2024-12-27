@@ -1,20 +1,28 @@
-{ lib, pkgs, systemSettings, userSettings, ... }:
-
 {
-  imports =
-    [ ../../system/hardware-configuration.nix
-      ../../system/hardware/time.nix # Network time sync
-      ../../system/security/firewall.nix
-      ../../system/security/doas.nix
-      ../../system/security/gpg.nix
-      ( import ../../system/app/docker.nix {storageDriver = null; inherit pkgs userSettings lib;} )
-    ];
+  lib,
+  pkgs,
+  systemSettings,
+  userSettings,
+  ...
+}: {
+  imports = [
+    ../../system/hardware-configuration.nix
+    ../../system/hardware/time.nix # Network time sync
+    ../../system/security/firewall.nix
+    ../../system/security/doas.nix
+    ../../system/security/gpg.nix
+    (import ../../system/app/docker.nix {
+      storageDriver = null;
+      inherit pkgs userSettings lib;
+    })
+  ];
 
   # Fix nix path
-  nix.nixPath = [ "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-                  "nixos-config=$HOME/dotfiles/system/configuration.nix"
-                  "/nix/var/nix/profiles/per-user/root/channels"
-                ];
+  nix.nixPath = [
+    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    "nixos-config=$HOME/dotfiles/system/configuration.nix"
+    "/nix/var/nix/profiles/per-user/root/channels"
+  ];
 
   # Ensure nix flakes are enabled
   nix.extraOptions = ''
@@ -25,14 +33,23 @@
   nixpkgs.config.allowUnfree = true;
 
   # Kernel modules
-  boot.kernelModules = [ "i2c-dev" "i2c-piix4" ];
+  boot.kernelModules = ["i2c-dev" "i2c-piix4"];
 
   # Bootloader
   # Use systemd-boot if uefi, default to grub otherwise
-  boot.loader.systemd-boot.enable = if (systemSettings.bootMode == "uefi") then true else false;
-  boot.loader.efi.canTouchEfiVariables = if (systemSettings.bootMode == "uefi") then true else false;
+  boot.loader.systemd-boot.enable =
+    if (systemSettings.bootMode == "uefi")
+    then true
+    else false;
+  boot.loader.efi.canTouchEfiVariables =
+    if (systemSettings.bootMode == "uefi")
+    then true
+    else false;
   boot.loader.efi.efiSysMountPoint = systemSettings.bootMountPath; # does nothing if running bios rather than uefi
-  boot.loader.grub.enable = if (systemSettings.bootMode == "uefi") then false else true;
+  boot.loader.grub.enable =
+    if (systemSettings.bootMode == "uefi")
+    then false
+    else true;
   boot.loader.grub.device = systemSettings.grubDevice; # does nothing if running uefi rather than bios
 
   # Networking
@@ -63,8 +80,8 @@
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = userSettings.name;
-    extraGroups = [ "networkmanager" "wheel" "rudra" "cups" "scanner" "lp" "libvirtd" "docker" "adbusers" "kvm" ];
-    packages = with pkgs; [ git ];
+    extraGroups = ["networkmanager" "wheel" "rudra" "cups" "scanner" "lp" "libvirtd" "docker" "adbusers" "kvm"];
+    packages = with pkgs; [git];
     uid = 1000;
   };
 
@@ -96,10 +113,9 @@
   radarr.enable = true;
 
   # I use zsh btw
-  environment.shells = with pkgs; [ zsh ];
+  environment.shells = with pkgs; [zsh];
   programs.zsh.enable = true;
 
   # It is ok to leave this unchanged for compatibility purposes
   system.stateVersion = "22.11";
-
 }

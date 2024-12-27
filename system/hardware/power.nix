@@ -1,6 +1,4 @@
-{ lib, ... }:
-
-{
+{lib, ...}: {
   services.tlp = {
     enable = false;
     settings = {
@@ -44,5 +42,4 @@
       INTEL_GPU_MIN_FREQ_ON_BAT = 600;
     };
   };
-
 }

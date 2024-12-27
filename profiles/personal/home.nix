@@ -1,18 +1,21 @@
-{ config, pkgs, userSettings, ... }:
-
 {
+  config,
+  pkgs,
+  userSettings,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = userSettings.username;
-  home.homeDirectory = "/home/"+userSettings.username;
+  home.homeDirectory = "/home/" + userSettings.username;
 
   programs.home-manager.enable = true;
   # home-manager.backupFileExtension = "backup";
 
-
-  imports = [ ../work/home.nix # Personal is essentially work system + games
-              ../../user/app/games/games.nix # Various videogame apps
-            ];
+  imports = [
+    ../work/home.nix # Personal is essentially work system + games
+    ../../user/app/games/games.nix # Various videogame apps
+  ];
 
   home.stateVersion = "22.11"; # Please read the comment before changing.
 
@@ -23,7 +26,6 @@
     brave
     git
     syncthing
-
   ];
 
   xdg.enable = true;
@@ -33,5 +35,4 @@
       XDG_GAME_SAVE_DIR = "${config.home.homeDirectory}/Media/Game Saves";
     };
   };
-
 }

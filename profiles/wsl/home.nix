@@ -1,22 +1,25 @@
-{ config, pkgs, userSettings, ... }:
-
 {
+  config,
+  pkgs,
+  userSettings,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = userSettings.username;
-  home.homeDirectory = "/home/"+userSettings.username;
+  home.homeDirectory = "/home/" + userSettings.username;
 
   programs.home-manager.enable = true;
   # home-manager.backupFileExtension = "backup";
 
   imports = [
-              ../../user/shell/sh.nix # My zsh and bash config
-              ../../user/shell/cli-collection.nix # Useful CLI apps
-              ../../user/app/doom-emacs/doom.nix # My doom emacs config
-              ../../user/app/ranger/ranger.nix # My ranger file manager config
-              ../../user/app/git/git.nix # My git config
-              ../../user/style/stylix.nix # Styling and themes for my apps
-            ];
+    ../../user/shell/sh.nix # My zsh and bash config
+    ../../user/shell/cli-collection.nix # Useful CLI apps
+    ../../user/app/doom-emacs/doom.nix # My doom emacs config
+    ../../user/app/ranger/ranger.nix # My ranger file manager config
+    ../../user/app/git/git.nix # My git config
+    ../../user/style/stylix.nix # Styling and themes for my apps
+  ];
 
   home.stateVersion = "22.11"; # Please read the comment before changing.
 
@@ -31,7 +34,8 @@
 
     # Various dev packages
     texinfo
-    libffi zlib
+    libffi
+    zlib
     nodePackages.ungit
   ];
 
@@ -64,5 +68,4 @@
   };
 
   news.display = "silent";
-
 }

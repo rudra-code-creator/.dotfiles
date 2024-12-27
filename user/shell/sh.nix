@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-let
-
+{pkgs, ...}: let
   # My shell aliases
   myAliases = {
     shopt = "echo 'hello'";
@@ -59,8 +57,7 @@ let
     scr = "bash $HOME/.scripts/scrcp.sh";
     apacherestart = "sudo systemctl restart apache2";
   };
-in
-{
+in {
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
@@ -76,10 +73,19 @@ in
   };
 
   home.packages = with pkgs; [
-    disfetch lolcat cowsay onefetch
-    gnugrep gnused
-    bat eza bottom fd bc
-    direnv nix-direnv
+    disfetch
+    lolcat
+    cowsay
+    onefetch
+    gnugrep
+    gnused
+    bat
+    eza
+    bottom
+    fd
+    bc
+    direnv
+    nix-direnv
   ];
 
   programs.direnv.enable = true;

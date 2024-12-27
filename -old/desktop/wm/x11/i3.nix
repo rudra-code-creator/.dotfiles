@@ -3,15 +3,12 @@
   pkgs,
   # callPackage,
   ...
-}:
-
-let
+}: let
   # Import the background image into the Nix store
   # Adjust this path to point to the correct location of your background image
   backgroundImage = pkgs.copyPathToStore ../../slick-greeter/1.jpeg;
-in
-{
-  environment.pathsToLink = [ "/libexec" ];
+in {
+  environment.pathsToLink = ["/libexec"];
 
   services.xserver = {
     enable = true;
@@ -81,6 +78,6 @@ in
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 }

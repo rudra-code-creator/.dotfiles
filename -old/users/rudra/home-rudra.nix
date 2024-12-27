@@ -3,16 +3,13 @@
   pkgs,
   inputs,
   ...
-}:
-
-{
+}: {
   imports = [
     ../rudra/home-packages.nix
     ../rudra/nushell.nix
     ../rudra/rust.nix
     # ../firefox.nix
     inputs.nix-colors.homeManagerModules.default
-
   ];
 
   home.username = "rudra";
@@ -24,7 +21,6 @@
     settings."org/gnome/shell" = {
       disable-user-extensions = false;
       enabled-extensions = with pkgs.gnomeExtensions; [
-
         add-username-to-top-panel.extensionUuid
         alphabetical-app-grid.extensionUuid
         appindicator.extensionUuid
@@ -65,14 +61,11 @@
 
         applications-menu.extensionUuid
         native-window-placement.extensionUuid
-
       ];
     };
 
     settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
   };
-
-
 
   qt.enable = true;
   qt.platformTheme.name = "gtk";
@@ -89,9 +82,9 @@
     theme = {
       name = "Catppuccin-Macchiato-Compact-Pink-Dark";
       package = pkgs.catppuccin-gtk.override {
-        accents = [ "pink" ];
+        accents = ["pink"];
         size = "compact";
-        tweaks = [ "rimless" "black" ];
+        tweaks = ["rimless" "black"];
         variant = "macchiato";
       };
     };
@@ -211,8 +204,8 @@
   programs.nnn = {
     enable = true;
 
-    package = pkgs.nnn.override { withNerdIcons = true; };
-    extraPackages = with pkgs; [ ffmpegthumbnailer mediainfo sxiv ];
+    package = pkgs.nnn.override {withNerdIcons = true;};
+    extraPackages = with pkgs; [ffmpegthumbnailer mediainfo sxiv];
 
     bookmarks = {
       d = "~/Documents";
@@ -227,15 +220,15 @@
       v = "imgview";
     };
 
-    plugins.src = (pkgs.fetchFromGitHub {
-      owner = "jarun";
-      repo = "nnn";
-      rev = "v4.0";
-      sha256 = "sha256-Hpc8YaJeAzJoEi7aJ6DntH2VLkoR6ToP6tPYn3llR7k=";
-    }) + "/plugins";
+    plugins.src =
+      (pkgs.fetchFromGitHub {
+        owner = "jarun";
+        repo = "nnn";
+        rev = "v4.0";
+        sha256 = "sha256-Hpc8YaJeAzJoEi7aJ6DntH2VLkoR6ToP6tPYn3llR7k=";
+      })
+      + "/plugins";
   };
-
-
 
   programs.git = {
     enable = true;
@@ -282,8 +275,7 @@
     ];
 
     tmux.enableShellIntegration = true;
-    tmux.shellIntegrationOptions = [ "-d 40%" ];
-
+    tmux.shellIntegrationOptions = ["-d 40%"];
   };
 
   programs.bottom = {
@@ -386,7 +378,6 @@
     enableFishIntegration = true;
     enableNushellIntegration = true;
     enableXsessionIntegration = true;
-
   };
 
   programs.thefuck = {

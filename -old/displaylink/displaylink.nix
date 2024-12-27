@@ -1,9 +1,4 @@
-{
-  pkgs,
-  ...
-}:
-
-let
+{pkgs, ...}: let
   # Use the full path to the directory containing the displaylink.nix file
   driverFile = "$HOME/nixos-config/modules/displaylink/displaylink-600.zip";
 
@@ -14,13 +9,11 @@ let
   '';
 
   newHash = builtins.readFile (
-    pkgs.runCommand "new-displaylink-hash" { } ''
+    pkgs.runCommand "new-displaylink-hash" {} ''
       ${updateDisplayLinkHash} > $out
     ''
   );
-
-in
-{
+in {
   nixpkgs.config.displaylink = {
     enable = true;
     driverFile = driverFile;

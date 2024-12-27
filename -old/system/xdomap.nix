@@ -3,9 +3,7 @@
   pkgs,
   # lib,
   ...
-}:
-
-{
+}: {
   services.xserver = {
     xkb.layout = "us";
     xkb.variant = "";

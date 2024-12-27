@@ -1,10 +1,11 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   programs.bash = {
     enable = true;
     shellAliases = {
-
       # Nixos commands
       rebuild = "sudo nixos-rebuild switch";
       cdmodules = "cd $HOME/nixos-config/modules";
@@ -49,7 +50,6 @@
       sreload = "swaymsg reload";
       scr = "bash $HOME/.scripts/scrcp.sh";
       apacherestart = "sudo systemctl restart apache2";
-
     };
     initExtra = ''
       # Chain of sourcing:

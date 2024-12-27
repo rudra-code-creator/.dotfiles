@@ -3,9 +3,7 @@
   # lib,
   pkgs,
   ...
-}:
-
-{
+}: {
   # Server-side SSH configuration
   services.openssh = {
     enable = true;
@@ -31,7 +29,7 @@
   };
 
   # Enable FUSE
-  boot.kernelModules = [ "fuse" ];
+  boot.kernelModules = ["fuse"];
 
   # Install SSHFS and other useful SSH-related tools
   environment.systemPackages = with pkgs; [
@@ -65,6 +63,6 @@
   services.xserver.enable = true;
 
   # Allow users in the "fuse" group to use FUSE
-  users.groups.fuse = { };
-  users.users.rudra.extraGroups = [ "fuse" ];
+  users.groups.fuse = {};
+  users.users.rudra.extraGroups = ["fuse"];
 }
