@@ -69,6 +69,10 @@ let myScript = ''
 in
 {
   environment.systemPackages = [
+    pkgs.nix-output-monitor
+    pkgs.nvd
+    pkgs.nvdtools
+    pkgs.nh
     (pkgs.writeScriptBin "phoenix" myScript)
   ];
 }

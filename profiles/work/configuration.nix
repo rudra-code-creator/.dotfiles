@@ -184,6 +184,12 @@
     nix-index
     nix-prefetch-git
     nix-melt
+    nix-ld
+    nix-output-monitor
+    nvd
+    nvdtools
+    nh # Nix helper
+
 
     flake-checker # Flake health checker
     autoflake #Tool to remove unused imports and unused variables
