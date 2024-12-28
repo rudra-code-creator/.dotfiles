@@ -75,7 +75,13 @@
 
     ../../user/shell/cli-collection.nix # Useful CLI apps
     #../../user/app/doom-emacs/doom.nix # My doom emacs config
-    ../../user/app/nvim/nvim.nix # My doom emacs config
+
+    # Change neovim configs by selecting a different config ID:
+    # over here --------------o
+    #                         |
+    #                         v
+    ../../user/app/nvim-config2/neovim.nix
+
     #../../user/app/emacsng # Me experimenting with emacsng and a vanilla config
     ../../user/app/ranger/ranger.nix # My ranger file manager config
     ../../user/app/git/git.nix # My git config
