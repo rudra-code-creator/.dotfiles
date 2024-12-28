@@ -1,4 +1,8 @@
 {pkgs, ...}: {
+  imports = [
+    ./cli-utils/starship.nix
+  ];
+
   # Collection of useful CLI apps
   home.packages = with pkgs; [
     # Command Line
@@ -28,6 +32,7 @@
     neovim
 
     (pkgs.callPackage ../pkgs/pokemon-colorscripts.nix {})
+
     (pkgs.writeShellScriptBin "airplane-mode" ''
       #!/bin/sh
       connectivity="$(nmcli n connectivity)"

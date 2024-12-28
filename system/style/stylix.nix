@@ -16,7 +16,7 @@
 in {
   imports = [inputs.stylix.nixosModules.stylix];
 
-  stylix.autoEnable = false;
+  stylix.autoEnable = true;
   stylix.polarity = themePolarity;
   stylix.image = pkgs.fetchurl {
     url = backgroundUrl;
@@ -47,7 +47,6 @@ in {
     greeters.slick.enable = true;
     greeters.slick.theme.name = myLightDMTheme;
   };
-  stylix.targets.console.enable = true;
 
   environment.sessionVariables = {
     QT_QPA_PLATFORMTHEME = "qt5ct";

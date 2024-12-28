@@ -338,7 +338,7 @@
 
     rust-overlay.url = "github:oxalica/rust-overlay";
 
-    ghostty = { url = "github:ghostty-org/ghostty"; };
+    ghostty = {url = "github:ghostty-org/ghostty";};
 
     blocklist-hosts = {
       url = "github:StevenBlack/hosts";

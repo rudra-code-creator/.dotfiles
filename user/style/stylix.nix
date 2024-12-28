@@ -14,7 +14,7 @@ in {
   imports = [inputs.stylix.homeManagerModules.stylix];
 
   home.file.".currenttheme".text = userSettings.theme;
-  stylix.autoEnable = false;
+  stylix.autoEnable = true;
   stylix.polarity = themePolarity;
   stylix.image = pkgs.fetchurl {
     url = backgroundUrl;
@@ -77,8 +77,7 @@ in {
     font.size = config.stylix.fonts.sizes.terminal;
     font.normal.family = userSettings.font;
   };
-  stylix.targets.kitty.enable = true;
-  stylix.targets.gtk.enable = true;
+
   stylix.targets.rofi.enable =
     if (userSettings.wmType == "x11")
     then true
