@@ -76,16 +76,17 @@
 
   programs.jq.enable = true;
 
-  programs.mcfly = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    enableFishIntegration = true;
-    fuzzySearchFactor = 4;
-    fzf.enable = true;
-    interfaceView = "TOP";
-    keyScheme = "vim";
-  };
+  #ATUIN is better
+  # programs.mcfly = {
+  #   enable = true;
+  #   enableBashIntegration = true;
+  #   enableZshIntegration = true;
+  #   enableFishIntegration = true;
+  #   fuzzySearchFactor = 4;
+  #   fzf.enable = true;
+  #   interfaceView = "TOP";
+  #   keyScheme = "vim";
+  # };
 
   programs.bash.enable = true;
   programs.zsh.enable = true;
@@ -98,15 +99,6 @@
     enableZshIntegration = true;
     enableFishIntegration = true;
     enableNushellIntegration = true;
-  };
-
-  programs.starship = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    enableFishIntegration = true;
-    enableNushellIntegration = true;
-    enableIonIntegration = true;
   };
 
   programs.atuin = {

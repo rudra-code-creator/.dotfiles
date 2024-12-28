@@ -70,6 +70,8 @@
     (./. + "../../../user/wm" + ("/" + userSettings.wm + "/" + userSettings.wm) + ".nix") # My window manager selected from flake
     ../../user/shell/sh.nix # My zsh and bash config
     ../../user/app/nushell/nushell.nix # My nushell config
+    ../../user/app/terminal/ghostty.nix
+
     ../../user/shell/cli-collection.nix # Useful CLI apps
     #../../user/app/doom-emacs/doom.nix # My doom emacs config
     ../../user/app/nvim/nvim.nix # My doom emacs config
@@ -109,7 +111,7 @@
     # ".config/nix".source = ./dotfiles/nix;
     # ".config/nix-darwin".source = ./dotfiles/nix-darwin;
     ".config/tmux".source = /home/rudra/.dotfiles/profiles/work/dotfiles/tmux;
-    ".config/ghostty".source = /home/rudra/.dotfiles/profiles/work/dotfiles/ghostty;
+    # ".config/ghostty".source = /home/rudra/.dotfiles/profiles/work/dotfiles/ghostty;
   };
 
   home.stateVersion = "22.11"; # Please read the comment before changing.

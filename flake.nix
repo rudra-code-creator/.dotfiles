@@ -66,6 +66,8 @@
           );
     };
 
+    # New terminal made by Mitchell Hashimoto
+
     # create patched nixpkgs
     nixpkgs-patched =
       (import inputs.nixpkgs {
@@ -335,6 +337,8 @@
     stylix.url = "github:danth/stylix";
 
     rust-overlay.url = "github:oxalica/rust-overlay";
+
+    ghostty = { url = "github:ghostty-org/ghostty"; };
 
     blocklist-hosts = {
       url = "github:StevenBlack/hosts";
