@@ -334,6 +334,11 @@
       flake = false;
     };
 
+    fine-cmdline = {
+      url = "github:VonHeikemen/fine-cmdline.nvim";
+      flake = false;
+    };
+
     stylix.url = "github:danth/stylix";
 
     rust-overlay.url = "github:oxalica/rust-overlay";

@@ -1,6 +1,6 @@
 {
-  config,
-  lib,
+  # config,
+  # lib,
   pkgs,
   pkgs-stable,
   pkgs-emacs,
@@ -19,7 +19,7 @@
     killall
     diffutils
     findutils
-    utillinux
+    util-linux
     tzdata
     hostname
     man

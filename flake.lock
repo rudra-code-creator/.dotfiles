@@ -308,6 +308,22 @@
         "type": "github"
       }
     },
+    "fine-cmdline": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1721082103,
+        "narHash": "sha256-SMmOzDhkRBBPCuXXZFUxog6YWRQ2tdlJuJGjYlyNTgk=",
+        "owner": "VonHeikemen",
+        "repo": "fine-cmdline.nvim",
+        "rev": "aec9efebf6f4606a5204d49ffa3ce2eeb7e08a3e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "VonHeikemen",
+        "repo": "fine-cmdline.nvim",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -1539,6 +1555,7 @@
         "eaf": "eaf",
         "eaf-browser": "eaf-browser",
         "emacs-pin-nixpkgs": "emacs-pin-nixpkgs",
+        "fine-cmdline": "fine-cmdline",
         "ghostty": "ghostty",
         "home-manager-stable": "home-manager-stable",
         "home-manager-unstable": "home-manager-unstable",
