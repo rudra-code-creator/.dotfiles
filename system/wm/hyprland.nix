@@ -10,6 +10,7 @@ in {
     ./wayland.nix
     ./pipewire.nix
     ./dbus.nix
+    ./hyprland/wlogout.nix
   ];
 
   # Security

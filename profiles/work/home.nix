@@ -71,6 +71,7 @@
     ../../user/shell/sh.nix # My zsh and bash config
     ../../user/app/nushell/nushell.nix # My nushell config
     ../../user/app/terminal/ghostty.nix
+    ../../user/app/zed/zed.nix
 
     ../../user/shell/cli-collection.nix # Useful CLI apps
     #../../user/app/doom-emacs/doom.nix # My doom emacs config
