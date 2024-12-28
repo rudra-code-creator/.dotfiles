@@ -1,4 +1,0 @@
-version: '1'
-aliases:
-  as: auth status
-  al: auth login

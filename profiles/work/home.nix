@@ -2,7 +2,7 @@
   config,
   pkgs,
   pkgs-stable,
-  pkgs-kdenlive,
+  # pkgs-kdenlive,
   userSettings,
   ...
 }: {
@@ -170,6 +170,7 @@
     microsoft-edge
     opera
     vivaldi
+    kdenlive
 
     # File Managers & Addons:
     xfce.catfish
@@ -385,7 +386,7 @@
         url = "https://github.com/Ultimaker/Cura/releases/download/5.8.1/UltiMaker-Cura-5.8.1-linux-X64.AppImage";
         hash = "sha256-VLd+V00LhRZYplZbKkEp4DXsqAhA9WLQhF933QAZRX0=";
       };
-      extraPkgs = pkgs: with pkgs; [];
+      # extraPkgs = pkgs: with pkgs; [];
     })
     #(pkgs-stable.cura.overrideAttrs (oldAttrs: {
     #  postInstall = oldAttrs.postInstall + ''cp -rf ${(pkgs.makeDesktopItem {
