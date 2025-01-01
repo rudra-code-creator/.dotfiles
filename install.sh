@@ -15,7 +15,7 @@ fi
 
 
 
-nix-shell -p git --command "git clone https://gitlab.com/librephoenix/nixos-config $SCRIPT_DIR"
+nix-shell -p git --command "git clone https://github.com/rudra-code-creator/.dotfiles $SCRIPT_DIR"
 
 # Generate hardware config for new system
 # shellcheck disable=SC2086
@@ -36,12 +36,12 @@ fi
 
 # Patch flake.nix with different username/name and remove email by default
 # shellcheck disable=SC2086
-sed -i "0,/emmet/s//$(whoami)/" $SCRIPT_DIR/flake.nix
+sed -i "0,/rudra/s//$(whoami)/" $SCRIPT_DIR/flake.nix
 # shellcheck disable=SC2046
 # shellcheck disable=SC2086
-sed -i "0,/Emmet/s//$(getent passwd $(whoami) | cut -d ':' -f 5 | cut -d ',' -f 1)/" $SCRIPT_DIR/flake.nix
+sed -i "0,/Rudra/s//$(getent passwd $(whoami) | cut -d ':' -f 5 | cut -d ',' -f 1)/" $SCRIPT_DIR/flake.nix
 # shellcheck disable=SC2086
-sed -i "s/emmet@librephoenix.com//" $SCRIPT_DIR/flake.nix
+sed -i "s/rudrakeshwani2@gmail.com//" $SCRIPT_DIR/flake.nix
 # shellcheck disable=SC2086
 sed -i "s+~/.dotfiles+$SCRIPT_DIR+g" $SCRIPT_DIR/flake.nix
 
