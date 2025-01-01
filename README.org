@@ -3,6 +3,7 @@
 
 ** What is this repository?
 These are my dotfiles (configuration files) for my NixOS setup(s).
+
 Forked from https://github.com/librephoenix/nixos-config
 
 ** My Themes
