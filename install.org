@@ -9,22 +9,18 @@ I wrote a quick automated install script at [[./install.sh][install.sh]]. It ess
 
 I'll eventually™ add the ability to supply arguments to this script as well.
 
-The quickest way to install is running the install script directly from the remote git repo using =nix run=, which is essentially just one of the following:
+The quickest way to install is running the install script directly from the remote git repo using =nix run=, which is essentially just the following:
 #+BEGIN_SRC sh :noeval
-# Install from gitlab
-nix run gitlab:librephoenix/nixos-config
 
-# Or install from github
-nix run github:librephoenix/nixos-config
+# install from github
+nix run github:rudra-code-creator/.dotfiles
 
-# Or install from codeberg
-nix run git+https://codeberg.org/librephoenix/nixos-config
 #+END_SRC
 
 This will install the dotfiles to =~/.dotfiles=, but if you'd like to install to a custom directory, just supply it as a positional argument, i.e:
 #+BEGIN_SRC sh :noeval
 # Install from gitlab
-nix run gitlab:librephoenix/nixos-config -- /your/custom/directory
+nix run github:rudra-code-creator/.dotfiles -- /your/custom/directory
 #+END_SRC
 
 The script will ask for sudo permissions at certain points, /but you should not run the script as root/.
@@ -35,17 +31,17 @@ nix-shell -p git
 #+end_src
 and then running:
 #+BEGIN_SRC sh :noeval
-nix run --experimental-features 'nix-command flakes' gitlab:librephoenix/nixos-config
+nix run --experimental-features 'nix-command flakes' github:rudra-code-creator/.dotfiles
 #+END_SRC
 
 And if you want a single copy-paste solution:
 #+begin_src sh :noeval
-nix-shell -p git --command "nix run --experimental-features 'nix-command flakes' gitlab:librephoenix/nixos-config"
+nix-shell -p git --command "nix run --experimental-features 'nix-command flakes' github:rudra-code-creator/.dotfiles"
 #+end_src
 
 This /should/ still work with a custom dotfiles directory too, i.e:
 #+begin_src sh :noeval
-nix-shell -p git --command "nix run --experimental-features 'nix-command flakes' gitlab:librephoenix/nixos-config -- /your/custom/directory"
+nix-shell -p git --command "nix run --experimental-features 'nix-command flakes' github:rudra-code-creator/.dotfiles -- /your/custom/directory"
 #+end_src
 
 At a certain point in the install script it will open =nano= (or whatever your $EDITOR is set to) and ask you to edit the =flake.nix=. You can edit as much or as little of the config variables as you like, and it will continue the install after you exit the editor.
@@ -61,12 +57,12 @@ Disclaimer: If you install my =homelab= or =worklab= profiles /CHANGE THE PUBLIC
 *** Install From Local Git Clone
 The dotfiles can be installed after cloning the repo into =~/.dotfiles= using:
 #+BEGIN_SRC sh :noeval
-git clone https://gitlab.com/librephoenix/nixos-config.git ~/.dotfiles
+git clone https://github.com/rudra-code-creator/.dotfiles.git ~/.dotfiles
 ~/.dotfiles/install.sh
 #+END_SRC
 or with a custom directory:
 #+BEGIN_SRC sh :noeval
-git clone https://gitlab.com/librephoenix/nixos-config.git /your/custom/directory
+git clone https://github.com/rudra-code-creator/.dotfiles.git /your/custom/directory
 /your/custom/directory/install.sh
 #+END_SRC
 
@@ -98,12 +94,12 @@ If you instead want to install this manually to see all the steps (kind of like 
 *** Clone Repo and Modify Configuration
 Start by cloning the repo:
 #+BEGIN_SRC sh :noeval
-git clone https://gitlab.com/librephoenix/nixos-config.git ~/.dotfiles
+git clone https://github.com/rudra-code-creator/.dotfiles.git ~/.dotfiles
 #+END_SRC
 
 Any custom directory should also work:
 #+BEGIN_SRC sh :noeval
-git clone https://gitlab.com/librephoenix/nixos-config.git /your/custom/directory
+git clone https://github.com/rudra-code-creator/.dotfiles.git /your/custom/directory
 #+END_SRC
 
 If you install to a custom directory, make sure to edit the =userSettings.dotfilesDir= in the beginning [[./flake.nix][flake.nix]], or else my [[./system/bin/phoenix.nix][phoenix wrapper script]] won't work.
