@@ -14,13 +14,13 @@ return {
   },
 
   {
-  	"nvim-treesitter/nvim-treesitter",
-  	opts = {
-  		ensure_installed = {
-  			"vim", "lua", "vimdoc",
-       "html", "css", 'gdscript'
-  		},
-  	},
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "vim", "lua", "vimdoc",
+        "html", "css", 'gdscript'
+      },
+    },
   },
 
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', lazy = false, },
@@ -34,7 +34,7 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",         -- required
       "sindrets/diffview.nvim",        -- optional - Diff integration
-  
+
       -- Only one of these is needed.
       "nvim-telescope/telescope.nvim", -- optional
     },

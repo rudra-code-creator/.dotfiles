@@ -12,4 +12,4 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 # Rebuild system
 # shellcheck disable=SC2086
 alejandra $SCRIPT_DIR
-sudo nixos-rebuild switch --flake "$SCRIPT_DIR"#system;
+sudo nixos-rebuild switch --impure --flake "$SCRIPT_DIR"#system;

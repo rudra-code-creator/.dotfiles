@@ -14,6 +14,9 @@ assert lib.asserts.assertOneOf "storageDriver" storageDriver [
   "overlay2"
   "zfs"
 ]; {
+  # Useful for AI #TODO make this work
+  # hardware.nvidia-container-toolkit.enable = true;
+
   virtualisation.docker = {
     enable = true;
     enableOnBoot = true;

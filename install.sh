@@ -54,12 +54,12 @@ $EDITOR $SCRIPT_DIR/flake.nix;
 
 # Permissions for files that should be owned by root
 # shellcheck disable=SC2086
-sudo $SCRIPT_DIR/harden.sh $SCRIPT_DIR;
+# sudo $SCRIPT_DIR/harden.sh $SCRIPT_DIR;
 
 # Rebuild system
 # shellcheck disable=SC2086
-sudo nixos-rebuild switch --flake $SCRIPT_DIR#system;
+sudo nixos-rebuild switch --flake $SCRIPT_DIR#system --impure;
 
 # Install and build home-manager configuration
 # shellcheck disable=SC2086
-nix run home-manager/master --extra-experimental-features nix-command --extra-experimental-features flakes -- switch --flake $SCRIPT_DIR#user;
+nix run home-manager/master --extra-experimental-features nix-command --extra-experimental-features flakes -- switch --flake $SCRIPT_DIR#user --impure;

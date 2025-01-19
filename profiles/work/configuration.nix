@@ -18,15 +18,19 @@
     ../../system/hardware/printing.nix
     ../../system/hardware/samba.nix
     ../../system/hardware/bluetooth.nix
+
     # ../../system/app/custom-systemd-services.nix
     # ../../system/hardware/displaylink/displaylink.nix #Can't figure out how to get this working ARGGGGGH, will revisit if I ever get a laptop that uses displaylink
     (./. + "../../../system/wm" + ("/" + userSettings.wm) + ".nix") # My window manager
     #../../system/app/flatpak.nix
+
     ../../system/app/virtualization.nix
+    ../../system/app/incus.nix
     (import ../../system/app/docker.nix {
       storageDriver = null;
       inherit pkgs userSettings lib;
     })
+
     ../../system/security/doas.nix
     ../../system/security/gpg.nix
     ../../system/security/blocklist.nix
@@ -40,7 +44,7 @@
   # Fix nix path
   nix.nixPath = [
     "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-    "nixos-config=$HOME/dotfiles/system/configuration.nix"
+    "nixos-config=$HOME/.dotfiles/system/configuration.nix"
     "/nix/var/nix/profiles/per-user/root/channels"
   ];
   # Ensure nix flakes are enabled
@@ -75,21 +79,25 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = [
-    (
-      final: prev: {
-        logseq = prev.logseq.overrideAttrs (oldAttrs: {
-          postFixup = ''
-            makeWrapper ${prev.electron_27}/bin/electron $out/bin/${oldAttrs.pname} \
-              --set "LOCAL_GIT_DIRECTORY" ${prev.git} \
-              --add-flags $out/share/${oldAttrs.pname}/resources/app \
-              --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}" \
-              --prefix LD_LIBRARY_PATH : "${prev.lib.makeLibraryPath [prev.stdenv.cc.cc.lib]}"
-          '';
-        });
-      }
-    )
-  ];
+
+  nixpkgs.overlays = [(self: super: {utillinux = super.util-linux;})];
+
+  #   nixpkgs.overlays = [
+  #     (
+  #       final: prev: {
+  #         logseq = prev.logseq.overrideAttrs (oldAttrs: {
+  #           postFixup = ''
+  #             makeWrapper ${prev.electron_27}/bin/electron $out/bin/${oldAttrs.pname} \
+  #               --set "LOCAL_GIT_DIRECTORY" ${prev.git} \
+  #               --add-flags $out/share/${oldAttrs.pname}/resources/app \
+  #               --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}" \
+  #               --prefix LD_LIBRARY_PATH : "${prev.lib.makeLibraryPath [prev.stdenv.cc.cc.lib]}"
+  #           '';
+  #         });
+  #       }
+  #     )
+  #   ];
+
   # logseq
   nixpkgs.config.permittedInsecurePackages = [
     "electron-27.3.11"
@@ -142,7 +150,9 @@
     if (systemSettings.bootMode == "uefi")
     then true
     else false;
-  boot.loader.efi.efiSysMountPoint = systemSettings.bootMountPath; # does nothing if running bios rather than uefi
+
+  # boot.loader.efi.efiSysMountPoint = systemSettings.bootMountPath; # does nothing if running bios rather than uefi
+
   boot.loader.grub.enable =
     if (systemSettings.bootMode == "uefi")
     then false
@@ -302,7 +312,6 @@
     rename
     rsync
     jq
-    neovim
     nitch
     eza
     bat

@@ -4,12 +4,15 @@
   pkgs-stable,
   # pkgs-kdenlive,
   userSettings,
+  lib,
   ...
 }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = userSettings.username;
   home.homeDirectory = "/home/" + userSettings.username;
+
+  nixpkgs.overlays = [(self: super: {utillinux = super.util-linux;})];
 
   dconf = {
     enable = true;
@@ -141,6 +144,11 @@
     vscode-langservers-extracted
     openvscode-server
     nvrh
+    htop
+    tmux
+
+    metasploit
+    yakuake
 
     # Office
     nextcloud-client
@@ -224,7 +232,6 @@
 
     # Programming:
     android-tools
-    neovim
     dockerfile-language-server-nodejs
     #melos #A tool for managing Dart projects with multiple packages. With IntelliJ and Vscode IDE support. Supports automated versioning, changelogs & publishing via Conventional Commits.
     #neovim-unwrapped
@@ -327,6 +334,40 @@
     # Messaging
     discord
     telegram-desktop
+
+    #JETBRAINS
+    jetbrains-mono
+    jetbrains-toolbox
+
+    jetbrains.writerside
+    jetbrains.webstorm
+    jetbrains.rust-rover
+    jetbrains.ruby-mine
+    jetbrains.rider
+
+    jetbrains.pycharm-professional
+    jetbrains.pycharm-community-bin
+    jetbrains.phpstorm
+
+    jetbrains.mps
+    jetbrains.jdk
+    jetbrains.jcef
+
+    jetbrains.idea-ultimate
+    jetbrains.idea-community-bin
+
+    jetbrains.goland
+    jetbrains.gateway
+    jetbrains.dataspell
+    jetbrains.datagrip
+    jetbrains.clion
+    jetbrains.aqua
+
+    #Kotlin
+    kotlin
+    kotlin-interactive-shell
+    kotlin-language-server
+    kotlin-native
 
     # Jellyfin Programs
     #jellyfin
@@ -514,7 +555,7 @@
   };
 
   home.sessionVariables = {
-    EDITOR = userSettings.editor;
+    EDITOR = lib.mkDefault userSettings.editor;
     SPAWNEDITOR = userSettings.spawnEditor;
     TERM = userSettings.term;
     BROWSER = userSettings.browser;

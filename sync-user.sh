@@ -17,7 +17,7 @@ sudo rm /home/rudra/.gtkrc-2.0.backup
 
 # Install and build home-manager configuration
 # shellcheck disable=SC2086
-home-manager switch --flake $SCRIPT_DIR#user --impure -b backup;
+home-manager switch --impure --flake $SCRIPT_DIR#user -b backup;
 
 # shellcheck disable=SC2086
 $SCRIPT_DIR/sync-posthook.sh

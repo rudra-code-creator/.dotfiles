@@ -29,7 +29,6 @@
     pciutils
     numbat
     vim
-    neovim
 
     (pkgs.callPackage ../pkgs/pokemon-colorscripts.nix {})
 

@@ -4,7 +4,6 @@
   pkgs,
   ...
 }:
-with builtins;
 with lib; {
   options.wsl.docker-native = with types; {
     enable = mkEnableOption "Native Docker integration in NixOS.";
