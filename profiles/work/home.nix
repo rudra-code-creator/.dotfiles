@@ -131,8 +131,8 @@
     zsh
     alacritty
     brave
-    vivaldi
-    vivaldi-ffmpeg-codecs
+    # vivaldi
+    # vivaldi-ffmpeg-codecs
     qutebrowser
     git
     syncthing
@@ -186,7 +186,7 @@
     firefox
     microsoft-edge
     opera
-    vivaldi
+    # vivaldi
     kdenlive
 
     # File Managers & Addons:

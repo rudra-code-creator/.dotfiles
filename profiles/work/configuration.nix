@@ -21,8 +21,9 @@
 
     # ../../system/app/custom-systemd-services.nix
     # ../../system/hardware/displaylink/displaylink.nix #Can't figure out how to get this working ARGGGGGH, will revisit if I ever get a laptop that uses displaylink
+
     (./. + "../../../system/wm" + ("/" + userSettings.wm) + ".nix") # My window manager
-    #../../system/app/flatpak.nix
+    ../../system/app/flatpak.nix
 
     ../../system/app/virtualization.nix
     # ../../system/app/incus.nix
