@@ -10,10 +10,16 @@
   # Configure X11
   services.xserver = {
     enable = true;
+    exportConfiguration = true;
     layout = "us";
     xkbVariant = "";
     xkbOptions = "caps:escape";
     excludePackages = [pkgs.xterm];
+
+    # I can't live with the slow default key repeat delays:
+    autoRepeatDelay = 200;
+    autoRepeatInterval = 25;
+
     displayManager = {
       lightdm.enable = true;
       sessionCommands = ''

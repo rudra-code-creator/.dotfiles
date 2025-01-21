@@ -25,7 +25,7 @@
     #../../system/app/flatpak.nix
 
     ../../system/app/virtualization.nix
-    ../../system/app/incus.nix
+    # ../../system/app/incus.nix
     (import ../../system/app/docker.nix {
       storageDriver = null;
       inherit pkgs userSettings lib;
@@ -38,8 +38,11 @@
     ../../system/security/firejail.nix
     ../../system/security/openvpn.nix
     ../../system/security/automount.nix
+
     ../../system/style/stylix.nix
   ];
+
+  hardware.enableRedistributableFirmware = true;
 
   # Fix nix path
   nix.nixPath = [
