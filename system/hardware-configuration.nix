@@ -4,12 +4,12 @@
 {
   config,
   lib,
-  pkgs,
   modulesPath,
   ...
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    ./nvidia_for_MSI_sword17_laptop.nix
   ];
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme"];

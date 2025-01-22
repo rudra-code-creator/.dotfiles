@@ -424,7 +424,7 @@
     krita
     pinta
     inkscape
-    (pkgs-stable.lollypop.override {youtubeSupport = false;})
+    lollypop
     vlc
     mpv
     yt-dlp
