@@ -272,6 +272,9 @@
     ghdorker
     ghrepo-stats
     ghostie # Github notifications
+    spacedrive
+
+    freetube
 
     #shell
     zoxide

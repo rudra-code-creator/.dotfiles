@@ -142,7 +142,7 @@
   };
 
   # Kernel modules
-  boot.kernelModules = ["i2c-dev" "i2c-piix4" "cpufreq_powersave" "fuse"];
+  boot.kernelModules = ["i2c-dev" "i2c-piix4" "cpufreq_powersave" "fuse" "uvcvideo"];
 
   # Bootloader
   # Use systemd-boot if uefi, default to grub otherwise
@@ -208,6 +208,8 @@
     sshfs
     openssh
     fuse
+
+    # for using a capture card
 
     #NIX/NIXOS ecosystem
     nil
@@ -501,4 +503,6 @@
   #Enable Sudo [REPLACED BY DOAS]
   # security.sudo.enable = true;
   # security.sudo.wheelNeedsPassword = false;
+
+  
 }
